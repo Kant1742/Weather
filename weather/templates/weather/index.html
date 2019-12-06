@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5><a href="/">Kant1742</a></h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="https://github.com/Kant1742" target="_blank">Github</a>
+            <a class="p-2 text-dark" href="https://www.linkedin.com/in/alex-cher/" target="_blank">LinkedIn</a>
+            <a class="p-2 text-dark" href="mailto:shaman.sanya98@gmail.com">Email</a>
+        </nav>
+    </div>
+    <h2>What is the weather like today?</h2><br>
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Input your city:</h4>
+            </div>
+            <div class="card-body">
+                <form action="." method="post">
+                    {% csrf_token %}
+                    {{ form.name }} <br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Information</h4>
+            </div>
+            {% for info in all_info %}
+            <div class="card-body">
+                <small class="text-muted">{{ info.city }}</small>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Temperature: {{info.temp}} <sup>o</sup>C</li>
+                    <li><img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Image"
+                            class="img-thumbnail">Condition: {{ info.descr }}</li>
+                    <hr size="2" color="orange" />
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</html>
